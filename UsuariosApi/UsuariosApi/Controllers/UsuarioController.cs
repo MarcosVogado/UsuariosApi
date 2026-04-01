@@ -1,28 +1,24 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using UsuariosApi.Data.Dtos;
-using UsuariosApi.Models;
+using UsuariosApi.Services;
 
 namespace UsuariosApi.Controllers;
 
-[ApiController]
+[ApiController] 
 [Route("[Controller]")]
 public class UsuarioController : ControllerBase
 {
-    private IMapper _mapper;
-    private UserManager<Usuario> _userManager;
-    private Services.CadastroService _cadastroService;
+    private CadastroService _cadastroService;
 
-    public UsuarioController(IMapper mapper, UserManager<Usuario> userManager)
+    public UsuarioController(CadastroService cadastroService)
     {
-        _mapper = mapper;
-        _userManager = userManager;
+        _cadastroService = cadastroService;
     }
 
     [HttpPost]
     public async Task<IActionResult> CadastraUsuario(CreateUsuarioDto dto)
     {
-        _cadastroService.CadastraAsync(dto);
+        await _cadastroService.Cadastra(dto);
+        return Ok();
     }
 }
