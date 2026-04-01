@@ -6,9 +6,9 @@ using UsuariosApi.Models;
 
 namespace UsuariosApi.Services;
 
-internal class TokenService
+public class TokenService
 {
-    public void GenerateToken(Usuario usuario)
+    public string GenerateToken(Usuario usuario)
     {
         Claim[] claims = new Claim[]
         {
@@ -26,5 +26,7 @@ internal class TokenService
             claims: claims,
             signingCredentials: signingCredentials
         );
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }
