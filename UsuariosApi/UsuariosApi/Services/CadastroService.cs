@@ -15,7 +15,7 @@ public class CadastroService
         _userManager = userManager;
         _mapper = mapper;
     }
-
+    
     public async Task Cadastra(CreateUsuarioDto dto)
     {
         Usuario usuario = _mapper.Map<Usuario>(dto);
