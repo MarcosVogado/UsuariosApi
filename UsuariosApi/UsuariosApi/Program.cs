@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UsuariosApi.Authorization;
@@ -26,6 +27,8 @@ builder.Services
 
 builder.Services.AddAutoMapper
     (AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddSingleton<IAuthorizationHandler, IdadeAuthorization>();
 
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<TokenService>();
