@@ -8,7 +8,7 @@ namespace UsuariosApi.Authorization
         {
             var dataNascimentoClaim = context.User.Claims.FirstOrDefault(c => c.Type == "DataNascimento");
 
-            if(dataNascimentoClaim is null) return Task.CompletedTask;
+            if (dataNascimentoClaim is null) return Task.CompletedTask;
 
             var dataNascimento = Convert.ToDateTime(dataNascimentoClaim.Value);
 
@@ -16,7 +16,7 @@ namespace UsuariosApi.Authorization
 
             if (dataNascimento > DateTime.Today.AddYears(-idadeUsuario)) idadeUsuario--;
 
-            if(idadeUsuario >= requirement.Idade) context.Succeed(requirement);
+            if (idadeUsuario >= requirement.Idade) context.Succeed(requirement);
 
             return Task.CompletedTask;
         }
