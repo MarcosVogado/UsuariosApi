@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace UsuariosApi.Authorization
 {
@@ -6,7 +7,7 @@ namespace UsuariosApi.Authorization
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, IdadeMinima requirement)
         {
-            var dataNascimentoClaim = context.User.Claims.FirstOrDefault(c => c.Type == "DataNascimento");
+            var dataNascimentoClaim = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.DateOfBirth);
 
             if (dataNascimentoClaim is null) return Task.CompletedTask;
 
