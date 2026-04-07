@@ -13,14 +13,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+var connString = builder.Configuration["ConnectionStrings:UsuarioConnection"];
+
 builder.Services.AddDbContext<UsuarioDbContext>
     (opts =>
     {
-        opts.UseMySql(builder.Configuration.GetConnectionString
-            ("UsuarioConnection"),
-            ServerVersion.AutoDetect
-            (builder.Configuration.GetConnectionString
-            ("UsuarioConnection")));
+        opts.UseMySql(connString, ServerVersion.AutoDetect(connString));
     });
 
 builder.Services
@@ -50,7 +48,7 @@ builder.Services.AddAuthentication(opt =>
     opt.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ABRIG25uihrgHSEUIFG905867gfyr23478")), 
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["SymmetricSecurityKey"])), 
         ValidateAudience = false,
         ValidateIssuer = false,
         ClockSkew = TimeSpan.Zero
