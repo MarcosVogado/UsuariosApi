@@ -12,6 +12,7 @@ public class TokenService
 
     public TokenService(IConfiguration configuration)
     {
+
         _configuration = configuration;
     }
 
