@@ -35,7 +35,7 @@ public class TokenService
             claims: claims,
             signingCredentials: signingCredentials
         );
-
+        //Teste
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }
